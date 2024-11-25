@@ -21,7 +21,6 @@ const Dashboard = () => {
     const [error, setError] = useState("");
     const [filterList, setFilterList] = useState([{ column: "", value: "" }]);
 
-    // Base URL from environment variable
     const BASE_URL = import.meta.env.VITE_SERVER_HOST_URL;
 
     const columns = [
@@ -33,7 +32,6 @@ const Dashboard = () => {
         { value: "marks", label: "Marks" },
     ];
 
-    // Fetch users from the API
     const fetchUsers = useCallback(async () => {
         setLoading(true);
         setError("");
@@ -49,7 +47,6 @@ const Dashboard = () => {
         }
     }, [BASE_URL]);
 
-    // Apply filters
     const applyFilters = useCallback(() => {
         let result = users;
 
@@ -66,19 +63,16 @@ const Dashboard = () => {
         setFilteredUsers(result);
     }, [users, filterList]);
 
-    // Handle filter changes
     const handleFilterChange = (index, field, value) => {
         const newFilters = [...filterList];
         newFilters[index] = { ...newFilters[index], [field]: value };
         setFilterList(newFilters);
     };
 
-    // Add new filter
     const addFilter = () => {
         setFilterList([...filterList, { column: "", value: "" }]);
     };
 
-    // Remove filter
     const removeFilter = (index) => {
         const newFilters = filterList.filter((_, i) => i !== index);
         setFilterList(newFilters);
@@ -106,22 +100,19 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="mx-auto max-w-[1200px] p-8">
+        <div className="mx-auto max-w-[1200px] p-4 md:p-8">
             <div className="flex flex-wrap items-center gap-4">
-                {/* Dashboard Title */}
                 <Typography
                     variant="h2"
-                    className="text-2xl font-bold"
+                    className="text-xl font-bold md:text-2xl"
                 >
                     Student Dashboard
                 </Typography>
-
-                {/* Button with Link */}
                 <a
                     href="https://github.com/Samuvel6826/startUp-task.git"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block rounded-xl border border-blue-500 px-4 py-2 text-blue-500 transition duration-300 hover:bg-blue-500 hover:text-white focus:outline-none focus:ring focus:ring-blue-300"
+                    className="inline-block rounded-lg border border-blue-500 px-4 py-2 text-sm text-blue-500 transition hover:bg-blue-500 hover:text-white focus:ring focus:ring-blue-300"
                 >
                     Source Code
                 </a>
@@ -133,13 +124,14 @@ const Dashboard = () => {
                 </Alert>
             )}
 
-            {/* Filters Section */}
             <Card className="mb-6 p-4">
-                <div className="mb-4 flex items-center justify-between">
-                    <Typography variant="h6">Filters</Typography>
+                <div className="mb-4 flex flex-col items-start md:flex-row md:items-center md:justify-between">
+                    <Typography variant="h6" className="mb-2 md:mb-0">
+                        Filters
+                    </Typography>
                     <Button
                         size="sm"
-                        className="flex items-center gap-2 bg-blue-500"
+                        className="bg-blue-500"
                         onClick={addFilter}
                     >
                         Add Filter
@@ -147,7 +139,7 @@ const Dashboard = () => {
                 </div>
 
                 {filterList.map((filter, index) => (
-                    <div key={index} className="mb-4 flex gap-4">
+                    <div key={index} className="mb-4 flex flex-col gap-4 md:flex-row">
                         <Select
                             value={filter.column}
                             onChange={(value) => handleFilterChange(index, "column", value)}
@@ -160,7 +152,6 @@ const Dashboard = () => {
                                 </Option>
                             ))}
                         </Select>
-
                         <Input
                             type="text"
                             label="Filter value..."
@@ -168,11 +159,9 @@ const Dashboard = () => {
                             onChange={(e) => handleFilterChange(index, "value", e.target.value)}
                             className="flex-1"
                         />
-
                         <Button
                             color="red"
                             variant="text"
-                            className="px-4"
                             onClick={() => removeFilter(index)}
                         >
                             Remove
@@ -181,25 +170,22 @@ const Dashboard = () => {
                 ))}
             </Card>
 
-            {/* Rest of the component remains the same */}
             {loading ? (
                 <div className="flex h-32 items-center justify-center">
                     <Spinner className="h-12 w-12" />
                 </div>
             ) : (
                 <>
-                    {/* Table */}
                     <Card className="mb-8 overflow-hidden">
                         <div className="overflow-x-auto">
-                            <table className="w-full min-w-max table-auto text-left">
+                            <table className="w-full table-auto text-left">
                                 <thead>
                                     <tr>
                                         {columns.map((col) => (
-                                            <th key={col.value} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                                            <th key={col.value} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 text-sm">
                                                 <Typography
                                                     variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal leading-none opacity-70"
+                                                    className="font-normal opacity-70"
                                                 >
                                                     {col.label}
                                                 </Typography>
@@ -209,10 +195,10 @@ const Dashboard = () => {
                                 </thead>
                                 <tbody>
                                     {filteredUsers.map((user, index) => (
-                                        <tr key={user._id || index} className="even:bg-blue-gray-50/50">
+                                        <tr key={user._id || index} className="even:bg-blue-gray-50">
                                             {columns.map((col) => (
-                                                <td key={col.value} className="p-4">
-                                                    <Typography variant="small" color="blue-gray">
+                                                <td key={col.value} className="p-4 text-sm">
+                                                    <Typography variant="small">
                                                         {user[col.value]}
                                                     </Typography>
                                                 </td>
@@ -224,12 +210,11 @@ const Dashboard = () => {
                         </div>
                     </Card>
 
-                    {/* Bar Chart */}
-                    <Card className="p-6">
-                        <Typography variant="h5" color="blue-gray" className="mb-4">
+                    <Card className="p-4 md:p-6">
+                        <Typography variant="h5" className="mb-4">
                             Student Marks Distribution
                         </Typography>
-                        <div className="h-96">
+                        <div className="h-64 md:h-96">
                             {filteredUsers.length > 0 ? (
                                 <Bar
                                     data={chartData}
