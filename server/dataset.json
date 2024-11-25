@@ -1,0 +1,66 @@
+[
+    {
+        "name": "John Doe",
+        "grade": "10th",
+        "age": 16,
+        "gender": "Male",
+        "subject": "Mathematics",
+        "marks": 85
+    },
+    {
+        "name": "Jane Smith",
+        "grade": "10th",
+        "age": 15,
+        "gender": "Female",
+        "subject": "Science",
+        "marks": 92
+    },
+    {
+        "name": "Mike Johnson",
+        "grade": "9th",
+        "age": 15,
+        "gender": "Male",
+        "subject": "Mathematics",
+        "marks": 78
+    },
+    {
+        "name": "Sarah Williams",
+        "grade": "11th",
+        "age": 17,
+        "gender": "Female",
+        "subject": "English",
+        "marks": 95
+    },
+    {
+        "name": "Tom Brown",
+        "grade": "9th",
+        "age": 14,
+        "gender": "Male",
+        "subject": "Science",
+        "marks": 88
+    },
+    {
+        "name": "Emily Davis",
+        "grade": "11th",
+        "age": 16,
+        "gender": "Female",
+        "subject": "English",
+        "marks": 91
+    },
+    {
+        "name": "David Wilson",
+        "grade": "10th",
+        "age": 16,
+        "gender": "Male",
+        "subject": "Mathematics",
+        "marks": 83
+    },
+    {
+        "name": "Lisa Anderson",
+        "grade": "9th",
+        "age": 15,
+        "gender": "Female",
+        "subject": "Science",
+        "marks": 89
+    }
+]
